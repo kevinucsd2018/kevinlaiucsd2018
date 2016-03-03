@@ -1,4 +1,6 @@
 package calendar;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Essential tools for creating a calendar.
@@ -7,6 +9,22 @@ package calendar;
  * @date 2/28/2016
  */
 public class createCalendar {
+    
+    /**
+     * Gets the current month and year using the Date class.
+     * @return array with month and year
+     */
+    public int[] getCurrentDate() {
+        int[] monthYear = new int[2];
+        Calendar current = Calendar.getInstance();
+        
+        monthYear[0] = current.get(Calendar.MONTH) + 1;
+        monthYear[1] = current.get(Calendar.YEAR);
+        
+            return monthYear;
+    }
+    
+    
     
     /**Given a date, determine what day it falls on. Find the sum of the 
      * day, month, year and century offset, modulo 7.
