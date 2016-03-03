@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calendar;
+
+
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -25,12 +22,11 @@ import java.util.HashMap;
 
 
 
-
 /**
- * Calendar application.
+ * GUI for the calendar application.
  * @author Jonathan
+ * @date 3/2/2016
  */
-
 public class Calendar extends Application {
     private String[] months = {
         "January",
@@ -52,13 +48,20 @@ public class Calendar extends Application {
     };
     
     private GridPane calendarSpace;
+    
     private TextField[] daySpaces;
-    public TextField month;
-    public TextField year;
+    private TextField month;
+    private TextField year;
+    private TextField monthNum;
+    
+    
     private HBox displayMonthYear;
+    
     private BorderPane app;
+    
     private Button nextMonth;
     private Button prevMonth;
+    
     createCalendar calFunctions = new createCalendar();
     
     @Override
@@ -111,16 +114,20 @@ public class Calendar extends Application {
         
         //create the label for month and year
         month = new TextField();
+        monthNum = new TextField();
         year = new TextField();
         
-        //determine which month we are currently in
+        //get the string corresponding to the month we are in
         currentMonth = months[monthYear[0] - 1];
         
+        //set month and year to appropriate Textfields
         month.setText(currentMonth);
         year.setText("" + monthYear[1]);
+        monthNum.setText("" + monthYear[0]);
+        monthNum.setVisible(false);
         
         //HBox includes Month, Year, Previous, and Next
-        displayMonthYear = new HBox(4);
+        displayMonthYear = new HBox(5);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
         
@@ -129,7 +136,8 @@ public class Calendar extends Application {
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
         
-        displayMonthYear.getChildren().addAll(month, year, prevMonth, nextMonth);
+        //add to HBox
+        displayMonthYear.getChildren().addAll(month, year, prevMonth, nextMonth, monthNum);
         
         //add everything to the borderpane
         app = new BorderPane();
