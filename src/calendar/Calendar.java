@@ -6,6 +6,7 @@
 package calendar;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,14 +17,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import java.awt.Color;
+import javafx.event.ActionEvent;
+import java.util.HashMap;
+
+
 
 
 /**
  * Calendar application.
  * @author Jonathan
  */
+
 public class Calendar extends Application {
     private String[] months = {
         "January",
@@ -46,14 +53,17 @@ public class Calendar extends Application {
     
     private GridPane calendarSpace;
     private TextField[] daySpaces;
-    private TextField month;
-    private TextField year;
+    public TextField month;
+    public TextField year;
     private HBox displayMonthYear;
     private BorderPane app;
+    private Button nextMonth;
+    private Button prevMonth;
     createCalendar calFunctions = new createCalendar();
     
     @Override
     public void start(Stage stage) throws Exception {
+        
         int gridWidth = 80;
         int gridHeight = 60;
         int numColumns = 7; //7 days per week
@@ -109,8 +119,17 @@ public class Calendar extends Application {
         month.setText(currentMonth);
         year.setText("" + monthYear[1]);
         
-        displayMonthYear = new HBox(2);
-        displayMonthYear.getChildren().addAll(month, year);
+        //HBox includes Month, Year, Previous, and Next
+        displayMonthYear = new HBox(4);
+        nextMonth = new Button(">");
+        prevMonth = new Button("<");
+        
+        //add event listeners for next and previous buttons
+        moveMonth monthAction = new moveMonth();
+        nextMonth.setOnAction(monthAction);
+        prevMonth.setOnAction(monthAction);
+        
+        displayMonthYear.getChildren().addAll(month, year, prevMonth, nextMonth);
         
         //add everything to the borderpane
         app = new BorderPane();
@@ -130,5 +149,39 @@ public class Calendar extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    
+     
+ 
+    /**
+     * Event Handler for previous and next buttons.
+     */
+    public class moveMonth implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent e) {
+            if (e.getSource() == prevMonth) {
+                System.out.println("previous");
+                
+                //grab the month integer from the textfield, to be added later
+                // add or subtract one depending on which button was pressed (account for 0 index)
+                //grab the year from the textfield using name.getText()
+                //put new month, day=1, year into findDay() method in createCalendar
+                //create new gridpane
+                //add constraints to gridpane (see above)
+                //use two for loops (as above) to put textfields into gridpane
+                //replace old gridpane with new gridpane
+
+            
+            
+            
+            }
+            else if (e.getSource() == nextMonth) {
+                System.out.println("next");
+            
+            }
+    
+    } 
+}
+
     
 }
