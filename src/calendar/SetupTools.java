@@ -8,13 +8,13 @@ import java.util.Date;
  * @version 1.0
  * @date 2/28/2016
  */
-public class createCalendar {
+public class SetupTools {
     
     /**
      * Gets the current month and year using the Date class.
      * @return array with month and year
      */
-    public int[] getCurrentDate() {
+    public static int[] getCurrentDate() {
         int[] monthYear = new int[2];
         Calendar current = Calendar.getInstance();
         
@@ -23,7 +23,7 @@ public class createCalendar {
         
    
         
-            return monthYear;
+        return monthYear;
     }
     
     
@@ -44,7 +44,7 @@ public class createCalendar {
      * @param year
      * @return the day that the date falls on. Refer to key above.
      */
-    public int findDay(int month, int day, int year) {
+    public static int findDay(int month, int day, int year) {
         int dayOfWeek = 0; 
         
         int dayOffset = 0;
@@ -123,7 +123,7 @@ public class createCalendar {
      * @param year
      * @return true if the year is a leap year, false otherwise.
      */
-    public boolean leapYear(int year) {
+    public static boolean leapYear(int year) {
         boolean leapYear = false;
         boolean divisibleBy4 = (year % 4 == 0);
         boolean divisibleBy100 = (year % 100 == 0);
@@ -140,17 +140,30 @@ public class createCalendar {
         return leapYear;
     }
     
-    public static void main(String[] args) {
-        int whatDay = 0;
-        int month = Integer.parseInt(args[0]);
-        int day = Integer.parseInt(args[1]);
-        int year = Integer.parseInt(args[2]);
-        
-        createCalendar cal = new createCalendar();
-        
-        whatDay = cal.findDay(month, day, year);
-        System.out.println(whatDay);
     
-    }
     
+    /**
+     * Finds the total number of days in a given month.
+     * @param month
+     * @param year
+     */
+    public static int findTotalDays(int month, int year) {
+        int[] numDays = {31, 28, 31, 30, 31, 30, 31, 31, 30 ,31, 30, 31};
+        int totalDays = 0;
+        boolean leapYear = false;
+        
+        //determine if a year is leap year
+        leapYear = leapYear(year);
+        
+        //February in leap years have 29 days
+        if (leapYear && (month == 2)) {
+            totalDays = numDays[month - 1] + 1;
+        }
+        
+        //all other months
+        else {
+            totalDays = numDays[month - 1];
+        }
+        return totalDays;
+    }  
 }
