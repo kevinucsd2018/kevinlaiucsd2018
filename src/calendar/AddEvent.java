@@ -3,6 +3,7 @@ package calendar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,8 @@ public class AddEvent implements EventHandler<ActionEvent> {
     protected TextField yearEnd;
     protected TextField timeEnd;
     protected TextField titleText;
+    protected ComboBox AMPMStart;
+    protected ComboBox AMPMEnd;
     
     @Override
     public void handle(ActionEvent e) {
@@ -48,6 +51,23 @@ public class AddEvent implements EventHandler<ActionEvent> {
         Label end = new Label("Ends: ");
         Button submit = new Button("Submit");
         GridPane eventGrid = new GridPane();
+        AMPMStart = new ComboBox();
+        AMPMEnd = new ComboBox();
+        
+        //add options for combobox
+        AMPMStart.getItems().addAll("AM", "PM");
+        AMPMEnd.getItems().addAll("AM", "PM");
+        
+        //set prompt text
+        titleText.setPromptText("Untitled Event");
+        monthStart.setPromptText("March");
+        monthEnd.setPromptText("March");
+        dayStart.setPromptText("01");
+        dayEnd.setPromptText("01");
+        yearStart.setPromptText("2016");
+        yearEnd.setPromptText("2016");
+        timeStart.setPromptText("8:00");
+        timeEnd.setPromptText("9:00");
         
         //add everything to GridPane
         eventGrid.add(addNew, 1, 0, 1, 3);
@@ -61,14 +81,20 @@ public class AddEvent implements EventHandler<ActionEvent> {
         eventGrid.add(dayStart, 2, 2);
         eventGrid.add(yearStart, 3, 2);
         eventGrid.add(timeStart, 4, 2);
+        eventGrid.add(AMPMStart, 5, 2);
         
         eventGrid.add(monthEnd, 1, 3);
         eventGrid.add(dayEnd, 2, 3);
         eventGrid.add(yearEnd, 3, 3);
         eventGrid.add(timeEnd, 4, 3);
+        eventGrid.add(AMPMEnd, 5, 3);
         
         //replace old GridPane with this one
         Calendar.app.setCenter(eventGrid);
-        return;
+        
+        //add inner class
+        //check if file exists with corresponding month
+            //if not, make one and write
+            //if so, filestream open it and append it
     }
 }
