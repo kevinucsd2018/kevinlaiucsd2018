@@ -43,6 +43,8 @@ public class SetupGUI {
         
         //style the GridPane
         calendarSpace.setStyle("-fx-background-color: #FFFAF0");
+        calendarSpace.setHgap(5);
+        calendarSpace.setVgap(5);
         
         //determine offset
         offset = SetupTools.findDay(month, 1, year);
@@ -62,6 +64,8 @@ public class SetupGUI {
             daySpaces[i] = new Button("" + i);
             daySpaces[i].setStyle("-fx-background-color: #EED8AE");
             daySpaces[i].setOnAction(daySelector);
+            daySpaces[i].setPrefWidth(Double.MAX_VALUE);
+            daySpaces[i].setPrefHeight(Double.MAX_VALUE);
             calendarSpace.add(daySpaces[i], col, row, 1, 1);
             col++;
             

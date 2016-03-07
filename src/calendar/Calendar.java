@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calendar;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
@@ -55,19 +49,22 @@ public class Calendar extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        String currentMonth = "";
-        int[] monthYear;
         
         //create the label for month and year
         month = new Label();
         year = new Label();
         
+        //catches output of SetupTools.getCurrentDate()
+        int[] monthYear = SetupTools.getCurrentDate();
+        
         //get corresponding month name; set month and year
-        monthYear = SetupTools.getCurrentDate();
         month.setText(monthNames[monthYear[0] - 1]);
         year.setText("" + monthYear[1]);
         month.setStyle("-fx-background-color: #48D1CC");
         year.setStyle("-fx-background-color: #48D1CC");
+        month.setPrefWidth(100);
+        year.setPrefWidth(100);
+        
         
         //set up hidden monthNum and day labels
         monthNum = new Label(String.valueOf(monthYear[0]));
@@ -77,22 +74,29 @@ public class Calendar extends Application {
         calControls = new HBox(6);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
+        nextMonth.setPrefWidth(200);
+        prevMonth.setPrefWidth(200);
         prevMonth.setStyle("-fx-background-color: #EED8AE");
         nextMonth.setStyle("-fx-background-color: #EED8AE");
         calControls.getChildren().addAll(prevMonth, month, year, nextMonth, day, monthNum);
         
         //Event controls in VBox
         eventControls = new VBox(2);
+        eventControls.setSpacing(10);
         viewEvent = new Button("View");
         addEvent = new Button("Add");
         viewEvent.setStyle("-fx-background-color: #48D1CC");
         addEvent.setStyle("-fx-background-color: #48D1CC");
+        viewEvent.setPrefWidth(Double.MAX_VALUE);
+        addEvent.setPrefWidth(Double.MAX_VALUE);
         eventControls.getChildren().addAll(viewEvent, addEvent);
           
-        //add event listeners for next and previous buttons
+        //add event listeners 
         MoveMonth monthAction = new MoveMonth();
+        AddEvent newEvent = new AddEvent();
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
+        addEvent.setOnAction(newEvent);
         
         //add controls to BorderPane
         app = new BorderPane();
@@ -105,7 +109,7 @@ public class Calendar extends Application {
         
         //create the scene
         stage.setTitle("Calendar");
-        Scene scene = new Scene(app, 599, 520);
+        Scene scene = new Scene(app, 680, 560);
         stage.setScene(scene);
         stage.show();
     }
