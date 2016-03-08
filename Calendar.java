@@ -97,7 +97,7 @@ public class Calendar extends Application {
         //add calendar to BorderPane
         calendar = new SetupGUI(monthYear[0], monthYear[1]);
         app.setCenter(calendar.calendarSpace);
-        
+             
         //create the scene
         stage.setTitle("Calendar");
         Scene scene = new Scene(app, 680, 560);
