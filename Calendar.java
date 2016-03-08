@@ -54,15 +54,14 @@ public class Calendar extends Application {
         //create the label for month and year
         month = new Label();
         year = new Label();
-        
         //catches output of SetupTools.getCurrentDate()
         int[] monthYear = SetupTools.getCurrentDate();
         
         //get corresponding month name; set month and year
         month.setText(monthNames[monthYear[0] - 1]);
         year.setText("" + monthYear[1]);
-        month.setStyle("-fx-background-color: #48D1CC");
-        year.setStyle("-fx-background-color: #48D1CC");
+        month.setStyle("-fx-background-color: #DA8566");
+        year.setStyle("-fx-background-color: #DA8566");
         month.setPrefWidth(140);
         year.setPrefWidth(140);
         month.setPrefHeight(25);
@@ -79,8 +78,8 @@ public class Calendar extends Application {
         prevMonth = new Button("<");
         nextMonth.setPrefWidth(200);
         prevMonth.setPrefWidth(200);
-        prevMonth.setStyle("-fx-background-color: #EED8AE");
-        nextMonth.setStyle("-fx-background-color: #EED8AE");
+        prevMonth.setStyle("-fx-background-color: #ECC9AC");
+        nextMonth.setStyle("-fx-background-color: #ECC9AC");
         calControls.getChildren().addAll(prevMonth, month, year, nextMonth);
         
           

@@ -21,15 +21,17 @@ public class SelectDay implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
         String day = ((Button)e.getSource()).getText(); //text from button
         String dayLabel = Calendar.day.getText(); //text from day Label
-        String select= "-fx-background-color: #ffb399";
-        String deselect = "-fx-background-color: #EED8AE";
+        String select= "-fx-background-color: #FFB5C5";
+        String deselect = "-fx-background-color: #FFD39B";
         int dayNum;
         
         
         //if a day is previousy selected, undo color change
         if (!dayLabel.equals("")) {
             dayNum = Integer.parseInt(dayLabel);
+            {
             ((SetupGUI)Calendar.calendar).daySpaces[dayNum].setStyle(deselect);
+            }
         }
 
         //color selected Button 
@@ -40,4 +42,3 @@ public class SelectDay implements EventHandler<ActionEvent> {
     }
     
 }
-
