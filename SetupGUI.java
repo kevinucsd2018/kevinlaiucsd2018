@@ -1,5 +1,6 @@
 package calendar;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -45,6 +46,7 @@ public class SetupGUI {
         calendarSpace.setStyle("-fx-background-color: #FFFAF0");
         calendarSpace.setHgap(5);
         calendarSpace.setVgap(5);
+        calendarSpace.setPadding(new Insets(40, 10, 10, 10));
         
         //determine offset
         offset = SetupTools.findDay(month, 1, year);

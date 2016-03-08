@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 /**
  * Calendar application.
  * @author Jonathan
+ * @author Kevin
  */
 
 public class Calendar extends Application {
@@ -62,8 +63,10 @@ public class Calendar extends Application {
         year.setText("" + monthYear[1]);
         month.setStyle("-fx-background-color: #48D1CC");
         year.setStyle("-fx-background-color: #48D1CC");
-        month.setPrefWidth(100);
-        year.setPrefWidth(100);
+        month.setPrefWidth(140);
+        year.setPrefWidth(140);
+        month.setPrefHeight(25);
+        year.setPrefHeight(25);
         
         
         //set up hidden monthNum and day labels
@@ -78,25 +81,13 @@ public class Calendar extends Application {
         prevMonth.setPrefWidth(200);
         prevMonth.setStyle("-fx-background-color: #EED8AE");
         nextMonth.setStyle("-fx-background-color: #EED8AE");
-        calControls.getChildren().addAll(prevMonth, month, year, nextMonth, day, monthNum);
+        calControls.getChildren().addAll(prevMonth, month, year, nextMonth);
         
-        //Event controls in VBox
-        eventControls = new VBox(2);
-        eventControls.setSpacing(10);
-        viewEvent = new Button("View");
-        addEvent = new Button("Add");
-        viewEvent.setStyle("-fx-background-color: #48D1CC");
-        addEvent.setStyle("-fx-background-color: #48D1CC");
-        viewEvent.setPrefWidth(Double.MAX_VALUE);
-        addEvent.setPrefWidth(Double.MAX_VALUE);
-        eventControls.getChildren().addAll(viewEvent, addEvent);
           
         //add event listeners 
         MoveMonth monthAction = new MoveMonth();
-        AddEvent newEvent = new AddEvent();
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
-        addEvent.setOnAction(newEvent);
         
         //add controls to BorderPane
         app = new BorderPane();
