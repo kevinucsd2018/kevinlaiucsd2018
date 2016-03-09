@@ -97,9 +97,11 @@ public class Calendar extends Application {
         //add event listeners 
         MoveMonth monthAction = new MoveMonth();
         AddEvent newEvent = new AddEvent();
+        ViewEvent view = new ViewEvent();
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
         addEvent.setOnAction(newEvent);
+        viewEvent.setOnAction(view);
         
         //add calendar and event controls to BorderPane
         app = new BorderPane();

@@ -23,6 +23,8 @@ public class ReadEvent {
     //try to read in save file
     try {
       File saveFile = new File(fileLocation);
+      
+      //TODO: check that file exists
       Scanner readEvents = new Scanner(saveFile);
       
       while (readEvents.hasNextLine()) {
