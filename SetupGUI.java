@@ -79,7 +79,7 @@ public class SetupGUI {
         row = 1;
         
         //set up checks to see if a given day is a holiday or event exists
-        Holiday.uploadHolidays();
+        Holiday holidayCheck = new Holiday();
         ReadEvent newEvent = new ReadEvent();
         
         //populate GridPane
@@ -90,7 +90,7 @@ public class SetupGUI {
             daySpaces[i].setPrefHeight(Double.MAX_VALUE);
             
             //color holidays different color
-            if (Holiday.isHoliday(month, i)) {
+            if (holidayCheck.isHoliday(month, i)) {
               daySpaces[i].setStyle("-fx-background-color: #70db70");
             
             }

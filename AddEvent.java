@@ -45,9 +45,6 @@ public class AddEvent implements EventHandler<ActionEvent> {
       return;
     }
     
-    //TESTING:
-    System.out.println("kEY IS: " + key);
-    
     //check if a reminder already exists
     ReadEvent reader = new ReadEvent();
     if (reader.events.containsKey(key)) {
@@ -67,7 +64,9 @@ public class AddEvent implements EventHandler<ActionEvent> {
     
     //add event listeners
     SaveEvent save = new SaveEvent();
+    GoBack back = new GoBack();
     submit.setOnAction(save);
+    cancel.setOnAction(back);
     
     addGrid.add(titleLabel, 1, 1, 3, 1);
     addGrid.add(reminderText, 1, 2, 3, 2);
@@ -116,7 +115,7 @@ public class AddEvent implements EventHandler<ActionEvent> {
         
         //TESTING: get rid of all newlines in reminder
         reminder = reminder.replace("\n", "<newline>");
-        System.out.println(reminder);
+        //System.out.println(reminder);
         
         //create filewriter and bufferedwriter
         FileWriter fw = new FileWriter(saveFile.getAbsolutePath(), created);
@@ -138,7 +137,8 @@ public class AddEvent implements EventHandler<ActionEvent> {
       int yearNum = Integer.parseInt(Calendar.year.getText());
       SetupGUI backToCal = new SetupGUI(monthNum, yearNum);
       Calendar.app.setCenter(backToCal.calendarSpace);
-
+      Calendar.calendar = backToCal;
+      
     }
   }
 }

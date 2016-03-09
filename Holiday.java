@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author Jonathan Chiu
  */
 public class Holiday {
-  protected static HashMap<String, String> holidays = new HashMap<String, String>();
+  protected HashMap<String, String> holidays = new HashMap<String, String>();
 
 
   /**
@@ -16,7 +16,7 @@ public class Holiday {
    * @param day
    * @return true if date is holiday, false otherwise
    */
-  public static boolean isHoliday(int month, int day) {
+  public boolean isHoliday(int month, int day) {
     boolean isHoliday = false;
     String monthText = String.valueOf(month);
     String dayText = String.valueOf(day);
@@ -33,9 +33,9 @@ public class Holiday {
   
   
   /**
-   * Upload holidays into HashMap
+   * Upload holidays into HashMap, constructor class
    */
-  protected static void uploadHolidays() {
+  public Holiday() {
     
     //grab the year from the label
     int year = Integer.parseInt(Calendar.year.getText());
@@ -55,6 +55,9 @@ public class Holiday {
     day = findHoliday(1, year, 3, 2);
     String MLKJr = createKey(1, day);
     holidays.put(MLKJr, "Martin Luther King Jr. Day");
+    
+    //TESTING
+    System.out.println("MLKJR: " + MLKJr + " day: " + day + " for " + year);
     
     //add president's day: 3rd monday in february
     day = findHoliday(2, year, 3, 2);
@@ -84,6 +87,7 @@ public class Holiday {
   }
   
   
+  
   /**
    * Creates a key for the HashMap
    * @param month
@@ -107,7 +111,7 @@ public class Holiday {
    * @param month
    * @param year
    * @param week number
-   * @param day 1 is sunday, 2 is monday... 7 is saturday
+   * @param day 1 is Sunday, 2 is Monday... 7 is Saturday
    * @return the day of the month
    */
   public static int findHoliday(int month, int year, int week, int day) {
@@ -119,8 +123,7 @@ public class Holiday {
     int offset = SetupTools.findDay(month, 1, year);
     
     //determine date of first occurence of a day
-    firstDay = day - offset % 7;
-    
+    firstDay = (day - offset + 7) % 7;
     
     //determine how many more days to add based on how many weeks
     moreWeeks = (week - 1) * 7;

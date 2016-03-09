@@ -2,6 +2,7 @@ package calendar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -24,7 +25,13 @@ public class ReadEvent {
     try {
       File saveFile = new File(fileLocation);
       
-      //TODO: check that file exists
+      //if file does not exist, create it and exit
+      if (!saveFile.exists()) {
+        saveFile.createNewFile();
+        return;
+      }
+      
+      //begin reading in events
       Scanner readEvents = new Scanner(saveFile);
       
       while (readEvents.hasNextLine()) {
@@ -34,8 +41,7 @@ public class ReadEvent {
       }
     
     }
-    catch (FileNotFoundException e) {
-      
-    }
+    catch (FileNotFoundException e) {}
+    catch (IOException ioe) {}
   }
 }

@@ -42,15 +42,17 @@ public class MoveMonth implements EventHandler<ActionEvent> {
             }
         }
         
-        //create new GridPane and replace old one
-        newMonth = new SetupGUI(monthNum, year);
-        Calendar.app.setCenter(newMonth.calendarSpace);
-        Calendar.calendar = newMonth;
+        
         
         //update month and year, reset day
         Calendar.month.setText(Calendar.monthNames[monthNum - 1]);
         Calendar.year.setText("" + year);
         Calendar.monthNum.setText("" + monthNum);
         Calendar.day.setText("");
+        
+        //create new GridPane and replace old one
+        newMonth = new SetupGUI(monthNum, year);
+        Calendar.app.setCenter(newMonth.calendarSpace);
+        Calendar.calendar = newMonth;
     } 
 }
