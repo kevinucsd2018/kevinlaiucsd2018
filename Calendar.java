@@ -1,6 +1,7 @@
 package calendar;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
@@ -46,6 +47,7 @@ public class Calendar extends Application {
     protected static Button addEvent;
     protected static Button viewEvent;
     protected static SetupGUI calendar;
+    
 
     
     @Override
@@ -68,13 +70,12 @@ public class Calendar extends Application {
         month.setPrefHeight(25);
         year.setPrefHeight(25);
         
-        
         //set up hidden monthNum and day labels
         monthNum = new Label(String.valueOf(monthYear[0]));
         day = new Label();
         
         //add prevMonth, month, year, nextMonth to calControls HBox
-        calControls = new HBox(6);
+        calControls = new HBox(4);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
         nextMonth.setPrefWidth(200);
@@ -83,13 +84,24 @@ public class Calendar extends Application {
         nextMonth.setStyle("-fx-background-color: #EED8AE");
         calControls.getChildren().addAll(prevMonth, month, year, nextMonth);
         
-          
+        //reminder control VBox
+        eventControls = new VBox(2);
+        addEvent = new Button("Add Reminder");
+        viewEvent = new Button("View Day");
+        addEvent.setStyle("-fx-background-color: #EED8AE");
+        viewEvent.setStyle("-fx-background-color: #EED8AE");
+        addEvent.setPrefWidth(Double.MAX_VALUE);
+        viewEvent.setPrefWidth(Double.MAX_VALUE);
+        eventControls.getChildren().addAll(addEvent, viewEvent);
+        
         //add event listeners 
         MoveMonth monthAction = new MoveMonth();
+        AddEvent newEvent = new AddEvent();
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
+        addEvent.setOnAction(newEvent);
         
-        //add controls to BorderPane
+        //add calendar and event controls to BorderPane
         app = new BorderPane();
         app.setTop(calControls);
         app.setBottom(eventControls);
@@ -97,10 +109,10 @@ public class Calendar extends Application {
         //add calendar to BorderPane
         calendar = new SetupGUI(monthYear[0], monthYear[1]);
         app.setCenter(calendar.calendarSpace);
-             
+        
         //create the scene
         stage.setTitle("Calendar");
-        Scene scene = new Scene(app, 680, 560);
+        Scene scene = new Scene(app, 700, 650);
         stage.setScene(scene);
         stage.show();
     }
