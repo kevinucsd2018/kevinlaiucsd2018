@@ -15,6 +15,7 @@ public class ViewEvent implements EventHandler<ActionEvent> {
   Label titleLabel;
   Label reminderLabel;
   Button confirm;
+  Button delete;
   VBox reminderContainer;
   
   @Override
@@ -44,10 +45,10 @@ public class ViewEvent implements EventHandler<ActionEvent> {
     Holiday holidayCheck = new Holiday();
     String holidayKey = holidayCheck.createKey(monthNum, dayNum);
     
+    //obtain holiday details if exists
     if (holidayCheck.holidays.containsKey(holidayKey)) {
       holidayName = holidayCheck.holidays.get(holidayKey);
     }
-    
     
     //create key for readevent hashmap
     ReadEvent reader = new ReadEvent();
@@ -67,17 +68,20 @@ public class ViewEvent implements EventHandler<ActionEvent> {
     titleLabel = new Label(title);
     reminderLabel = new Label(reminder);
     
-    //set up button
+    //set up buttons
     GoBack back = new GoBack();
+    DeleteEvent deleteEvent = new DeleteEvent();
     confirm = new Button("Thanks");
+    delete = new Button("Delete Reminder");
     confirm.setOnAction(back);
+    delete.setOnAction(deleteEvent);
     
-    reminderContainer = new VBox(3);
-    reminderContainer.getChildren().addAll(titleLabel, reminderLabel, confirm);
+    //add to VBox
+    reminderContainer = new VBox(4);
+    reminderContainer.getChildren().addAll(titleLabel, reminderLabel, confirm, delete);
     
     //display in app
     Calendar.app.setCenter(reminderContainer);
     
   }
-  
 }

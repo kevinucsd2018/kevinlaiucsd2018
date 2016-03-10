@@ -17,6 +17,7 @@ public class ReadEvent {
     String fileLocation = "save.txt";
     String key;
     String value;
+    String deleteTag = "<delete>";
     
     //initialize HashMap
     events = new HashMap<String, String>();
@@ -37,9 +38,15 @@ public class ReadEvent {
       while (readEvents.hasNextLine()) {
         key = readEvents.nextLine();
         value = readEvents.nextLine();
-        events.put(key, value);
+        
+        //if value is <delete>, delete mapping
+        if (value.equals(deleteTag)) {
+          events.remove(key);
+        }
+        else {
+          events.put(key, value);
+        }
       }
-    
     }
     catch (FileNotFoundException e) {}
     catch (IOException ioe) {}
