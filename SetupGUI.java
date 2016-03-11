@@ -108,8 +108,12 @@ public class SetupGUI {
             
             //color holidays different color
             if (holidayCheck.isHoliday(month, i)) {
+
               daySpaces[i].setStyle("-fx-background-color: #4EEE94");
              // daySpaces[i].setStyle("-fx-font-size: 14px");
+
+              daySpaces[i].setStyle("-fx-background-color: #70db70");
+
             
             }
             else {

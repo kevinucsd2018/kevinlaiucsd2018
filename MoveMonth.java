@@ -52,7 +52,7 @@ public class MoveMonth implements EventHandler<ActionEvent> {
         
         //create new GridPane and replace old one
         newMonth = new SetupGUI(monthNum, year);
-        
+
         Calendar.app.setCenter(newMonth.calendarSpace);
         Calendar.calendar = newMonth;
     } 
