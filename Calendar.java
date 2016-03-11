@@ -46,6 +46,7 @@ public class Calendar extends Application {
     protected static Button addEvent;
     protected static Button viewEvent;
     protected static SetupGUI calendar;
+    
 
     
     @Override
@@ -54,41 +55,54 @@ public class Calendar extends Application {
         //create the label for month and year
         month = new Label();
         year = new Label();
+        
         //catches output of SetupTools.getCurrentDate()
         int[] monthYear = SetupTools.getCurrentDate();
         
         //get corresponding month name; set month and year
         month.setText(monthNames[monthYear[0] - 1]);
         year.setText("" + monthYear[1]);
-        month.setStyle("-fx-background-color: #DA8566");
-        year.setStyle("-fx-background-color: #DA8566");
+        month.setStyle("-fx-background-color: #00B2EE");
+        year.setStyle("-fx-background-color: #00B2EE");
         month.setPrefWidth(140);
         year.setPrefWidth(140);
         month.setPrefHeight(25);
         year.setPrefHeight(25);
-        
         
         //set up hidden monthNum and day labels
         monthNum = new Label(String.valueOf(monthYear[0]));
         day = new Label();
         
         //add prevMonth, month, year, nextMonth to calControls HBox
-        calControls = new HBox(6);
+        calControls = new HBox(4);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
         nextMonth.setPrefWidth(200);
         prevMonth.setPrefWidth(200);
-        prevMonth.setStyle("-fx-background-color: #ECC9AC");
-        nextMonth.setStyle("-fx-background-color: #ECC9AC");
+        prevMonth.setStyle("-fx-background-color: #66CDAA");
+        nextMonth.setStyle("-fx-background-color: #66CDAA");
         calControls.getChildren().addAll(prevMonth, month, year, nextMonth);
         
-          
+        //reminder control VBox
+        eventControls = new VBox(2);
+        addEvent = new Button("Add Reminder");
+        viewEvent = new Button("View Day");
+        addEvent.setStyle("-fx-background-color: #66CDAA");
+        viewEvent.setStyle("-fx-background-color: #66CDAA");
+        addEvent.setPrefWidth(Double.MAX_VALUE);
+        viewEvent.setPrefWidth(Double.MAX_VALUE);
+        eventControls.getChildren().addAll(addEvent, viewEvent);
+        
         //add event listeners 
         MoveMonth monthAction = new MoveMonth();
+        AddEvent newEvent = new AddEvent();
+        ViewEvent view = new ViewEvent();
         nextMonth.setOnAction(monthAction);
         prevMonth.setOnAction(monthAction);
+        addEvent.setOnAction(newEvent);
+        viewEvent.setOnAction(view);
         
-        //add controls to BorderPane
+        //add calendar and event controls to BorderPane
         app = new BorderPane();
         app.setTop(calControls);
         app.setBottom(eventControls);
@@ -99,7 +113,7 @@ public class Calendar extends Application {
         
         //create the scene
         stage.setTitle("Calendar");
-        Scene scene = new Scene(app, 680, 560);
+        Scene scene = new Scene(app, 700, 650);
         stage.setScene(scene);
         stage.show();
     }
