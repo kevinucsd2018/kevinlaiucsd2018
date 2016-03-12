@@ -32,10 +32,12 @@ public class AddEvent implements EventHandler<ActionEvent> {
     String year = Calendar.year.getText();
     String titleDate = month + " " + day + ", " + year;
     String key = monthNum + "-" + day + "-" + year;
-    String existingReminder = "";
+    String existReminder = "";
     String errorTitle = "Uh oh";
     String errorHeader = "No day was selected";
     String errorContent = "Please select a day before adding a reminder";
+    String newlineTag = "<newline>";
+    String newlineSym = "\n";
 
     //check that date label is not empty
     if (day.equals("")) {
@@ -51,14 +53,15 @@ public class AddEvent implements EventHandler<ActionEvent> {
     //check if a reminder already exists
     ReadEvent reader = new ReadEvent();
     if (reader.events.containsKey(key)) {
+      
       //grab exising reminder and replace all <newline> with /n
-      existingReminder = reader.events.get(key).replace("<newline>", "\n");
+      existReminder = reader.events.get(key).replace(newlineTag, newlineSym);
     }
     
     //initialize controls
     addGrid = new GridPane();
     titleLabel = new Label("Reminder for: " + titleDate);
-    reminderText = new TextArea(existingReminder);
+    reminderText = new TextArea(existReminder);
     submit = new Button("Remember!");
     cancel = new Button("Forget it.");
     
@@ -91,6 +94,8 @@ public class AddEvent implements EventHandler<ActionEvent> {
       String reminderHeader = "No reminder was written";
       String reminderContent = "Please write a reminder";
       String save_file = "save.txt";
+      String newlineTag = "<newline>";
+      String newlineSym = "\n";
       
       //check that reminder field is not empty
       if (reminder.equals("")) {
@@ -105,15 +110,15 @@ public class AddEvent implements EventHandler<ActionEvent> {
       
       try {
         File saveFile = new File(save_file);
-        //if file does not exist, create it
+        
+        //if file does not exist, create it and exit
         if (!saveFile.exists()) {
           saveFile.createNewFile();
           created = false; 
         }
         
-        //TESTING: get rid of all newlines in reminder
-        reminder = reminder.replace("\n", "<newline>");
-        //System.out.println(reminder);
+        //replace all newline tags with newline symbols
+        reminder = reminder.replace(newlineSym, newlineTag);
         
         //create filewriter and bufferedwriter
         FileWriter fw = new FileWriter(saveFile.getAbsolutePath(), created);
@@ -127,7 +132,12 @@ public class AddEvent implements EventHandler<ActionEvent> {
         buffAdd.close();
       }
       catch (IOException exception) {
-      
+        //alert
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle(reminderTitle);
+        errorAlert.setHeaderText(reminderHeader);
+        errorAlert.setContentText("" + exception);
+        errorAlert.showAndWait();
       }
  
       //return to calendar view
@@ -135,8 +145,7 @@ public class AddEvent implements EventHandler<ActionEvent> {
       int yearNum = Integer.parseInt(Calendar.year.getText());
       SetupGUI backToCal = new SetupGUI(monthNum, yearNum);
       Calendar.app.setCenter(backToCal.calendarSpace);
-      Calendar.calendar = backToCal;
-      
+      Calendar.calendar = backToCal;  
     }
   }
 }
