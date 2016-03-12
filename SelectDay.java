@@ -22,9 +22,9 @@ public class SelectDay implements EventHandler<ActionEvent> {
     String newDayLabel = ((Button)e.getSource()).getText(); //text from button
     String oldDayLabel = Calendar.day.getText(); //text from day Label
 
-    String select = "-fx-background-color: #FFE1FF";
+    String deselect = "-fx-background-color: #FFE1FF";
 
-    String deselect = "-fx-background-color: #EED8AE";
+    String select = "-fx-background-color: #EED8AE";
 
     String year = Calendar.year.getText();
     int oldDayNum;
@@ -47,6 +47,7 @@ public class SelectDay implements EventHandler<ActionEvent> {
       //if it is not a holiday, undo color change
       if (!check.isHoliday(month, oldDayNum) && !reader.events.containsKey(key)) {
         ((SetupGUI)Calendar.calendar).daySpaces[oldDayNum].setStyle(deselect);
+        System.out.println(oldDayNum + " deselected");
       }
     }
 
@@ -56,6 +57,7 @@ public class SelectDay implements EventHandler<ActionEvent> {
     //if it is not a holiday and not an event, change colors
     if (!check.isHoliday(month, newDayNum) && !reader.events.containsKey(key)) {
       ((Button)e.getSource()).setStyle(select);
+      System.out.println(newDayNum + "selected");
     }
 
     //update dayLabel

@@ -74,14 +74,14 @@ public class Calendar extends Application {
         day = new Label();
         
         //add prevMonth, month, year, nextMonth to calControls HBox
-        calControls = new HBox(4);
+        calControls = new HBox(6);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
         nextMonth.setPrefWidth(200);
         prevMonth.setPrefWidth(200);
         prevMonth.setStyle("-fx-background-color: #66CDAA");
         nextMonth.setStyle("-fx-background-color: #66CDAA");
-        calControls.getChildren().addAll(prevMonth, month, year, nextMonth);
+        calControls.getChildren().addAll(prevMonth, month, year, nextMonth, monthNum, day);
         
         //reminder control VBox
         eventControls = new VBox(2);
