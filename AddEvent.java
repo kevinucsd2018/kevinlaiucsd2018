@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -60,10 +61,12 @@ public class AddEvent implements EventHandler<ActionEvent> {
     
     //initialize controls
     addGrid = new GridPane();
+    addGrid.setAlignment(Pos.CENTER);
     titleLabel = new Label("Reminder for: " + titleDate);
     reminderText = new TextArea(existReminder);
     submit = new Button("Remember!");
     cancel = new Button("Forget it.");
+    
     
     //add event listeners
     SaveEvent save = new SaveEvent();
@@ -73,7 +76,7 @@ public class AddEvent implements EventHandler<ActionEvent> {
     addGrid.add(titleLabel, 1, 1, 3, 1);
     addGrid.add(reminderText, 1, 2, 3, 2);
     addGrid.add(submit, 2, 4, 1, 1);
-    addGrid.add(cancel, 2, 5, 1, 1);
+    addGrid.add(cancel, 3, 4, 1, 1);
     Calendar.app.setCenter(addGrid);
   }
   

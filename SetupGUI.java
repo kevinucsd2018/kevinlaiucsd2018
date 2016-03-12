@@ -68,6 +68,7 @@ public class SetupGUI {
     }
 
     //style the GridPane
+
     calendarSpace.setStyle("-fx-background-image: url('http://media.idownloadblog.com/wp-content/uploads/2013/09/120@2xiphone.png')");
     calendarSpace.setHgap(calGap);
     calendarSpace.setVgap(calGap);
