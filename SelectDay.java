@@ -27,7 +27,7 @@ public class SelectDay implements EventHandler<ActionEvent> {
     String select = "-fx-background-color: #EED8AE";
     String year = Calendar.year.getText();
     int oldDay;
-    int newDayNum = Integer.parseInt(newDayLabel);
+    int newDay = Integer.parseInt(newDayLabel);
     int month = Integer.parseInt(Calendar.monthNum.getText());
 
     //create key for previous day to check against readevents hashmap
@@ -44,7 +44,7 @@ public class SelectDay implements EventHandler<ActionEvent> {
       oldDay = Integer.parseInt(oldDayLabel);
 
       //if it is not a holiday, undo color change
-      if (!check.isHoliday(month, oldDay) && !reader.events.containsKey(key)) {
+      if (!check.isHoliday(month, oldDay) && !reader.events.containsKey(key)){
         ((SetupGUI)Calendar.calendar).daySpaces[oldDay].setStyle(deselect);
       }
     }
@@ -53,7 +53,7 @@ public class SelectDay implements EventHandler<ActionEvent> {
     key = month + "-" + newDayLabel + "-" + year;
 
     //if it is not a holiday and not an event, change colors
-    if (!check.isHoliday(month, newDayNum) && !reader.events.containsKey(key)) {
+    if (!check.isHoliday(month, newDay) && !reader.events.containsKey(key)){
       ((Button)e.getSource()).setStyle(select);
     }
 
