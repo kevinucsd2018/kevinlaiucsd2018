@@ -29,7 +29,7 @@ public class SetupGUI {
   int monthNum;
   int monthLength;
   int year;
-  String[] dayNames = {"SUN", "MON", "TUES", "WED", "THUR", "FRI", "SAT"};
+  String[] dayNames = {"SU", "M", "T", "W", "TH", "F", "SA"};
 
 
 
@@ -42,10 +42,10 @@ public class SetupGUI {
     calendarSpace = new GridPane();
     daySpaces = new Button[35];
     dayLabels = new Label[7];
-    String eventColor = "-fx-background-color: #ff66ff";
-    String regColor = "-fx-background-color: #FFE1FF";
-    String holidayColor = "-fx-background-color: #70db70";
-    String dayColor = "-fx-background-color: #00E5EE";
+    String eventColor = "-fx-background-color: #eaa5b9";
+    String regColor = "-fx-background-color: #b7efc6";
+    String holidayColor = "-fx-background-color: #EE799F";
+    String dayColor = "-fx-background-color: #1ab177";
     String calSize = "-fx-font-size: 24px";
     int numColumns = 7;
     int numRows = 7;
@@ -68,11 +68,7 @@ public class SetupGUI {
     }
 
     //style the GridPane
-    calendarSpace.setStyle("-fx-background-image: "
-    + "url('http://previews.123rf.com/"
-    + "images/markovka/markovka1401/markovka140100676/26688543"
-    + "-Vector-abstract-background-Cool-cell-structure-Constellation"
-    + "-seamless-pattern-Endless-texture-with-s-Stock-Vector.jpg\')");
+    calendarSpace.setStyle("-fx-background-image: url('http://media.idownloadblog.com/wp-content/uploads/2013/09/120@2xiphone.png')");
     calendarSpace.setHgap(calGap);
     calendarSpace.setVgap(calGap);
     calendarSpace.setPadding(new Insets(extraPad, padding, padding, padding));

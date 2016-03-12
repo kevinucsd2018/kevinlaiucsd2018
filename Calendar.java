@@ -60,8 +60,8 @@ public class Calendar extends Application {
         int width_button = 200;
         
         //declaring variables for add reminder and view day
-        String reminder = "Add reminder";
-        String view_day = "View Day";
+        String reminder = "Add";
+        String view_day = "View";
         
         //create the label for month and year
         month = new Label();
@@ -80,8 +80,8 @@ public class Calendar extends Application {
         //get corresponding month name; set month and year
         month.setText(monthNames[monthYear[0] - 1]);
         year.setText("" + monthYear[1]);
-        month.setStyle("-fx-background-color: #00B2EE");
-        year.setStyle("-fx-background-color: #00B2EE");
+        //month.setStyle("-fx-background-color: #00B2EE");
+        //year.setStyle("-fx-background-color: #00B2EE");
         month.setPrefWidth(width);
         year.setPrefWidth(width);
         month.setPrefHeight(height);
