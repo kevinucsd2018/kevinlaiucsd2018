@@ -1,33 +1,32 @@
 package calendar;
 
-
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-/**
- * Updates the hidden day Label in SetupGUI
- * @author Jonathan Chiu
- */
 
+
+/**
+ * Updates the hidden day Label in Calendar class and highlights selected day.
+ * @author Jonathan Chiu A12113428 jhc028@ucsd.edu
+ * @author Kevin Lai A12012166 kelai@ucsd.edu
+ */
 public class SelectDay implements EventHandler<ActionEvent> {
     
+  
+  
   /**
-   * Get text of button and updates day Label
-   * @param e 
+   * Get text of pressed button and updates day Label
+   * @param e ActionEvent
    */
   @Override
   public void handle(ActionEvent e) {
     String newDayLabel = ((Button)e.getSource()).getText(); //text from button
     String oldDayLabel = Calendar.day.getText(); //text from day Label
-
     String deselect = "-fx-background-color: #FFE1FF";
-
     String select = "-fx-background-color: #EED8AE";
-
     String year = Calendar.year.getText();
-    int oldDayNum;
+    int oldDay;
     int newDayNum = Integer.parseInt(newDayLabel);
     int month = Integer.parseInt(Calendar.monthNum.getText());
 
@@ -42,12 +41,11 @@ public class SelectDay implements EventHandler<ActionEvent> {
     if (!oldDayLabel.equals("")) {
 
       //grab day and month from calendar
-      oldDayNum = Integer.parseInt(oldDayLabel);
+      oldDay = Integer.parseInt(oldDayLabel);
 
       //if it is not a holiday, undo color change
-      if (!check.isHoliday(month, oldDayNum) && !reader.events.containsKey(key)) {
-        ((SetupGUI)Calendar.calendar).daySpaces[oldDayNum].setStyle(deselect);
-        System.out.println(oldDayNum + " deselected");
+      if (!check.isHoliday(month, oldDay) && !reader.events.containsKey(key)) {
+        ((SetupGUI)Calendar.calendar).daySpaces[oldDay].setStyle(deselect);
       }
     }
 
@@ -57,11 +55,9 @@ public class SelectDay implements EventHandler<ActionEvent> {
     //if it is not a holiday and not an event, change colors
     if (!check.isHoliday(month, newDayNum) && !reader.events.containsKey(key)) {
       ((Button)e.getSource()).setStyle(select);
-      System.out.println(newDayNum + "selected");
     }
 
     //update dayLabel
     Calendar.day.setText(newDayLabel);
-
   }   
 }
