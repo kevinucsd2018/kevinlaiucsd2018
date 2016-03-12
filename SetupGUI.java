@@ -69,10 +69,7 @@ public class SetupGUI {
 
     //style the GridPane
     calendarSpace.setStyle("-fx-background-image: "
-    + "url('http://previews.123rf.com/"
-    + "images/markovka/markovka1401/markovka140100676/26688543"
-    + "-Vector-abstract-background-Cool-cell-structure-Constellation"
-    + "-seamless-pattern-Endless-texture-with-s-Stock-Vector.jpg\')");
+    + "url('background.jpg')");
     calendarSpace.setHgap(calGap);
     calendarSpace.setVgap(calGap);
     calendarSpace.setPadding(new Insets(extraPad, padding, padding, padding));
