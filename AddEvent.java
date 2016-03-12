@@ -11,7 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 /**
  * Adds an Event
@@ -39,6 +41,10 @@ public class AddEvent implements EventHandler<ActionEvent> {
     String errorContent = "Please select a day before adding a reminder";
     String newlineTag = "<newline>";
     String newlineSym = "\n";
+    int numColumns = 7;
+    int numRows = 6;
+    int gWidth = 93;
+    int gHeight = 70;
 
     //check that date label is not empty
     if (day.equals("")) {
@@ -66,6 +72,16 @@ public class AddEvent implements EventHandler<ActionEvent> {
     reminderText = new TextArea(existReminder);
     submit = new Button("Remember!");
     cancel = new Button("Forget it.");
+    submit.setStyle("-fx-background-color: #F7DCB4");
+    cancel.setStyle("-fx-background-color: #F7DCB4");
+    
+    //Set dimensions of the GridPane
+    for (int i = 0; i < numColumns; i++) {
+      addGrid.getColumnConstraints().add(new ColumnConstraints(gWidth));
+    }
+    for (int i = 0; i < numRows; i++) {
+      addGrid.getRowConstraints().add(new RowConstraints(gHeight));
+    }
     
     
     //add event listeners
@@ -73,8 +89,8 @@ public class AddEvent implements EventHandler<ActionEvent> {
     GoBack back = new GoBack();
     submit.setOnAction(save);
     cancel.setOnAction(back);
-    addGrid.add(titleLabel, 1, 1, 3, 1);
-    addGrid.add(reminderText, 1, 2, 3, 2);
+    addGrid.add(titleLabel, 1, 1, 5, 1);
+    addGrid.add(reminderText, 1, 2, 5, 2);
     addGrid.add(submit, 2, 4, 1, 1);
     addGrid.add(cancel, 3, 4, 1, 1);
     Calendar.app.setCenter(addGrid);

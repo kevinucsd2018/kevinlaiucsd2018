@@ -6,6 +6,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 
@@ -20,7 +23,7 @@ public class ViewEvent implements EventHandler<ActionEvent> {
   Label remindLab;
   Button confirm;
   Button delete;
-  VBox viewContainer;
+  GridPane viewContainer;
   
   @Override
   public void handle(ActionEvent e) {
@@ -36,9 +39,13 @@ public class ViewEvent implements EventHandler<ActionEvent> {
     String newlineTag = "<newline>";
     String newlineSym = "\n";
     String thanksMsg = "Thanks!";
-    String deleteMsg = "Delete Reminder";
+    String deleteMsg = "Delete";
     int monthNum;
     int dayNum;
+    int gWidth = 93;
+    int gHeight = 70;
+    int numColumns = 7;
+    int numRows = 7;
     
     //check that date label is not empty
     if (day.equals("")) {
@@ -81,6 +88,10 @@ public class ViewEvent implements EventHandler<ActionEvent> {
     reminder += "\n" + holidayName;
     titleLab = new Label(title);
     remindLab = new Label(reminder);
+    remindLab.setStyle("-fx-background-color: #F7DCB4");
+    remindLab.setPrefWidth(Double.MAX_VALUE);
+    remindLab.setPrefHeight(Double.MAX_VALUE);
+    
     
     //set up buttons
     GoBack back = new GoBack();
@@ -89,11 +100,27 @@ public class ViewEvent implements EventHandler<ActionEvent> {
     delete = new Button(deleteMsg);
     confirm.setOnAction(back);
     delete.setOnAction(deleteEvent);
+    confirm.setStyle("-fx-background-color: #F7DCB4");
+    delete.setStyle("-fx-background-color: #F7DCB4");
     
-    //add to VBox
-    viewContainer = new VBox(4);
+    //set up GridPane
+    viewContainer = new GridPane();
     viewContainer.setAlignment(Pos.CENTER);
-    viewContainer.getChildren().addAll(titleLab, remindLab, confirm, delete);
+    
+    //Set dimensions of the GridPane
+    for (int i = 0; i < numColumns; i++) {
+      viewContainer.getColumnConstraints().add(new ColumnConstraints(gWidth));
+    }
+    for (int i = 0; i < numRows; i++) {
+      viewContainer.getRowConstraints().add(new RowConstraints(gHeight));
+    }
+    
+    //add everything to GridPane
+    viewContainer.add(titleLab, 1, 1, 5, 1);
+    viewContainer.add(remindLab, 1, 2, 5, 2);
+    viewContainer.add(confirm, 2, 4, 1, 1);
+    viewContainer.add(delete, 3, 4, 1, 1);
+    //viewContainer.getChildren().addAll(titleLab, remindLab, confirm, delete);
     
     //display in program
     Calendar.app.setCenter(viewContainer);

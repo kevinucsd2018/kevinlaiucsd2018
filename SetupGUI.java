@@ -29,7 +29,7 @@ public class SetupGUI {
   int monthNum;
   int monthLength;
   int year;
-  String[] dayNames = {"SU", "M", "T", "W", "TH", "F", "SA"};
+  String[] dayNames = {"Su", "M", "T", "W", "Th", "F", "Sa"};
 
 
 
@@ -42,11 +42,11 @@ public class SetupGUI {
     calendarSpace = new GridPane();
     daySpaces = new Button[35];
     dayLabels = new Label[7];
-    String eventColor = "-fx-background-color: #eaa5b9";
-    String regColor = "-fx-background-color: #b7efc6";
+    String eventColor = "-fx-background-color: #ECB38A";
+    String regColor = "-fx-background-color: #F7DCB4";
     String holidayColor = "-fx-background-color: #EE799F";
-    String dayColor = "-fx-background-color: #1ab177";
-    String calSize = "-fx-font-size: 24px";
+    String dayColor = "-fx-background-color: #7CCDB2";
+    String calSize = "-fx-font-size: 18px";
     int numColumns = 7;
     int numRows = 7;
     int gWidth = 93;
@@ -68,8 +68,7 @@ public class SetupGUI {
     }
 
     //style the GridPane
-
-    calendarSpace.setStyle("-fx-background-image: url('http://media.idownloadblog.com/wp-content/uploads/2013/09/120@2xiphone.png')");
+    calendarSpace.setAlignment(Pos.CENTER);
     calendarSpace.setHgap(calGap);
     calendarSpace.setVgap(calGap);
     calendarSpace.setPadding(new Insets(extraPad, padding, padding, padding));

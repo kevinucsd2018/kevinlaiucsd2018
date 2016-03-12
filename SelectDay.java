@@ -23,8 +23,8 @@ public class SelectDay implements EventHandler<ActionEvent> {
   public void handle(ActionEvent e) {
     String newDayLabel = ((Button)e.getSource()).getText(); //text from button
     String oldDayLabel = Calendar.day.getText(); //text from day Label
-    String deselect = "-fx-background-color: #FFE1FF";
-    String select = "-fx-background-color: #EED8AE";
+    String deselect = "-fx-background-color: #F7DCB4";
+    String select = "-fx-background-color: #E0C09F";
     String year = Calendar.year.getText();
     int oldDay;
     int newDay = Integer.parseInt(newDayLabel);
