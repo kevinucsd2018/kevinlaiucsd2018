@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 
 /**
  * Calendar application.
- * @author Jonathan
- * @author Kevin
+ * @author Jonathan Chiu
+ * @author Kevin Lai
  */
 
 public class Calendar extends Application {
@@ -52,9 +52,27 @@ public class Calendar extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
+        //width and height for month label and year label
+        int width = 140;
+        int height = 25;
+        
+        //width for prevMonth and nextMonth buttons
+        int width_button = 200;
+        
+        //declaring variables for add reminder and view day
+        String reminder = "Add reminder";
+        String view_day = "View Day";
+        
         //create the label for month and year
         month = new Label();
         year = new Label();
+        
+        //variable for number of things in HBox and VBox
+        int HBOX_num = 4;
+        int VBOX_num = 2;
+        
+        //variable holding the string "Calendar"
+        String name = "Calendar";
         
         //catches output of SetupTools.getCurrentDate()
         int[] monthYear = SetupTools.getCurrentDate();
@@ -64,29 +82,30 @@ public class Calendar extends Application {
         year.setText("" + monthYear[1]);
         month.setStyle("-fx-background-color: #00B2EE");
         year.setStyle("-fx-background-color: #00B2EE");
-        month.setPrefWidth(140);
-        year.setPrefWidth(140);
-        month.setPrefHeight(25);
-        year.setPrefHeight(25);
+        month.setPrefWidth(width);
+        year.setPrefWidth(width);
+        month.setPrefHeight(height);
+        year.setPrefHeight(height);
         
         //set up hidden monthNum and day labels
         monthNum = new Label(String.valueOf(monthYear[0]));
         day = new Label();
         
         //add prevMonth, month, year, nextMonth to calControls HBox
-        calControls = new HBox(6);
+        calControls = new HBox(HBOX_num);
         nextMonth = new Button(">");
         prevMonth = new Button("<");
-        nextMonth.setPrefWidth(200);
-        prevMonth.setPrefWidth(200);
+        nextMonth.setPrefWidth(width_button);
+        prevMonth.setPrefWidth(width_button);
         prevMonth.setStyle("-fx-background-color: #66CDAA");
         nextMonth.setStyle("-fx-background-color: #66CDAA");
-        calControls.getChildren().addAll(prevMonth, month, year, nextMonth, monthNum, day);
+        calControls.getChildren().addAll(prevMonth, month, year, 
+        nextMonth);
         
         //reminder control VBox
-        eventControls = new VBox(2);
-        addEvent = new Button("Add Reminder");
-        viewEvent = new Button("View Day");
+        eventControls = new VBox(VBOX_num);
+        addEvent = new Button(reminder);
+        viewEvent = new Button(view_day);
         addEvent.setStyle("-fx-background-color: #66CDAA");
         viewEvent.setStyle("-fx-background-color: #66CDAA");
         addEvent.setPrefWidth(Double.MAX_VALUE);
@@ -112,7 +131,7 @@ public class Calendar extends Application {
         app.setCenter(calendar.calendarSpace);
         
         //create the scene
-        stage.setTitle("Calendar");
+        stage.setTitle(name);
         Scene scene = new Scene(app, 700, 650);
         stage.setScene(scene);
         stage.show();

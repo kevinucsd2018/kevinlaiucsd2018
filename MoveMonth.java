@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
  * Go to next or previous month.
  * 
  * @author Jonathan Chiu
+ * @author Kevin Lai
  */
 public class MoveMonth implements EventHandler<ActionEvent> {
     public int monthNum;
@@ -41,9 +42,7 @@ public class MoveMonth implements EventHandler<ActionEvent> {
                 monthNum--;
             }
         }
-        
-        
-        
+         
         //update month and year, reset day
         Calendar.month.setText(Calendar.monthNames[monthNum - 1]);
         Calendar.year.setText("" + year);

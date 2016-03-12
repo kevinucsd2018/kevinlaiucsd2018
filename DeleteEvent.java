@@ -9,17 +9,22 @@ import javafx.event.EventHandler;
 
 /**
  *
- * @author Jonathan
+ * @author Jonathan Chiu
+ * @author Kevin Lai
+ * 
  */
 public class DeleteEvent implements EventHandler<ActionEvent> {
+  
   String month;
   String day;
   String year;
 
-
-
   @Override
   public void handle(ActionEvent e) {
+    
+    //declaring the variable to hold "save.txt"
+    String save_file = "save.txt";
+    
     month = Calendar.monthNum.getText();
     day = Calendar.day.getText();
     year = Calendar.year.getText();
@@ -31,7 +36,7 @@ public class DeleteEvent implements EventHandler<ActionEvent> {
 
     //append save.txt with date as key and value of <delete>
     try {
-      File saveFile = new File("save.txt");
+      File saveFile = new File(save_file);
 
       //if file does not exist, create it
       if (!saveFile.exists()) {

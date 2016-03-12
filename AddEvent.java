@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Adds an Event
  * @author Jonathan Chiu
+ * @author Kevin Lai
  */
 public class AddEvent implements EventHandler<ActionEvent> {
   protected GridPane addGrid;
@@ -32,15 +33,17 @@ public class AddEvent implements EventHandler<ActionEvent> {
     String titleDate = month + " " + day + ", " + year;
     String key = monthNum + "-" + day + "-" + year;
     String existingReminder = "";
-    
+    String errorTitle = "Uh oh";
+    String errorHeader = "No day was selected";
+    String errorContent = "Please select a day before adding a reminder";
+
     //check that date label is not empty
     if (day.equals("")) {
       //alert
       Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-      errorAlert.setTitle("Uh oh");
-      errorAlert.setHeaderText("No day was selected.");
-      errorAlert.setContentText("Please select a day before adding a reminder.");
-
+      errorAlert.setTitle(errorTitle);
+      errorAlert.setHeaderText(errorHeader);
+      errorAlert.setContentText(errorContent);
       errorAlert.showAndWait();
       return;
     }
@@ -48,12 +51,9 @@ public class AddEvent implements EventHandler<ActionEvent> {
     //check if a reminder already exists
     ReadEvent reader = new ReadEvent();
     if (reader.events.containsKey(key)) {
-        
       //grab exising reminder and replace all <newline> with /n
       existingReminder = reader.events.get(key).replace("<newline>", "\n");
     }
-    
-    
     
     //initialize controls
     addGrid = new GridPane();
@@ -67,15 +67,11 @@ public class AddEvent implements EventHandler<ActionEvent> {
     GoBack back = new GoBack();
     submit.setOnAction(save);
     cancel.setOnAction(back);
-    
     addGrid.add(titleLabel, 1, 1, 3, 1);
     addGrid.add(reminderText, 1, 2, 3, 2);
     addGrid.add(submit, 2, 4, 1, 1);
     addGrid.add(cancel, 2, 5, 1, 1);
-    
     Calendar.app.setCenter(addGrid);
-    
-  
   }
   
   /**
@@ -91,22 +87,24 @@ public class AddEvent implements EventHandler<ActionEvent> {
       String key = month + "-" + day + "-" + year;
       String reminder = reminderText.getText();
       boolean created = true;
+      String reminderTitle = "Uh oh";
+      String reminderHeader = "No reminder was written";
+      String reminderContent = "Please write a reminder";
+      String save_file = "save.txt";
       
       //check that reminder field is not empty
       if (reminder.equals("")) {
         //alert
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setTitle("Uh oh");
-        errorAlert.setHeaderText("No reminder was written.");
-        errorAlert.setContentText("Please write a reminder.");
-
+        errorAlert.setTitle(reminderTitle);
+        errorAlert.setHeaderText(reminderHeader);
+        errorAlert.setContentText(reminderContent);
         errorAlert.showAndWait();
         return;
       }
       
       try {
-        File saveFile = new File("save.txt");
-      
+        File saveFile = new File(save_file);
         //if file does not exist, create it
         if (!saveFile.exists()) {
           saveFile.createNewFile();

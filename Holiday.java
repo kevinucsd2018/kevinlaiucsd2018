@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * Checks if a day is a holiday
  * @author Jonathan Chiu
+ * @author Kevin Lai
  */
 public class Holiday {
   protected HashMap<String, String> holidays = new HashMap<String, String>();
@@ -56,9 +57,6 @@ public class Holiday {
     String MLKJr = createKey(1, day);
     holidays.put(MLKJr, "Martin Luther King Jr. Day");
     
-    //TESTING
-    System.out.println("MLKJR: " + MLKJr + " day: " + day + " for " + year);
-    
     //add president's day: 3rd monday in february
     day = findHoliday(2, year, 3, 2);
     String president = createKey(2, day);
@@ -97,10 +95,8 @@ public class Holiday {
   public static String createKey(int month, int day) {
     String key = "";
     String monthText = String.valueOf(month);
-    String dayText = String.valueOf(day);
-    
+    String dayText = String.valueOf(day); 
     key = monthText + "-" + dayText;
-    
     return key;
   
   }

@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 /**
  *
  * @author Jonathan Chiu
+ * @author Kevin Lai
  */
 public class GoBack implements EventHandler<ActionEvent> {
   
